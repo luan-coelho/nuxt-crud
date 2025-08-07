@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { z } from 'zod'
-import { authClient } from '@/lib/auth-client'
 
 // Definir página como guest-only
 definePageMeta({
   layout: false,
 })
 
-const session = authClient.useSession()
+const { session, signIn } = useAuth()
 
 // Schema de validação com Zod
 const loginSchema = z.object({
@@ -35,7 +34,7 @@ async function onSubmit(event: { data: LoginForm }) {
   try {
     isLoading.value = true
 
-    const result = await authClient.signIn.email({
+    const result = await signIn.email({
       email: event.data.email,
       password: event.data.password,
     })
@@ -74,7 +73,7 @@ const signInWithGoogle = async () => {
   try {
     isGoogleLoading.value = true
 
-    await authClient.signIn.social({
+    await signIn.social({
       provider: 'google',
     })
   } catch {
@@ -93,7 +92,7 @@ const signInWithGoogle = async () => {
 watch(
   session,
   newSession => {
-    if (newSession?.data) {
+    if (newSession.data) {
       navigateTo('/dashboard')
     }
   },

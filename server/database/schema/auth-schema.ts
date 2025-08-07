@@ -55,3 +55,7 @@ export const verification = pgTable('verification', {
   createdAt: timestamp('created_at').$defaultFn(() => /* @__PURE__ */ new Date()),
   updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date()),
 })
+
+// TypeScript types
+export type User = typeof user.$inferSelect
+export type NewUser = typeof user.$inferInsert

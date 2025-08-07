@@ -1,0 +1,62 @@
+/* Estilos responsivos para o layout */
+
+/* Melhorias para a NavigationMenu em dispositivos móveis */
+.navigation-menu-mobile {
+  @apply text-sm;
+}
+
+.navigation-menu-mobile .navigation-item {
+  @apply py-2 px-3;
+}
+
+/* Ajustes para badges em telas pequenas */
+@media (max-width: 640px) {
+  .u-badge {
+    @apply text-xs px-1.5 py-0.5 min-w-[1.25rem] h-5;
+  }
+}
+
+/* Melhorias para o dropdown em dispositivos móveis */
+@media (max-width: 768px) {
+  .u-dropdown-menu {
+    @apply min-w-[200px] max-w-[calc(100vw-2rem)];
+  }
+}
+
+/* Scroll suave para navegação */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Melhorias para o overlay do sidebar */
+.sidebar-overlay {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Estilos para touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .u-button {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .u-avatar {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+
+/* Ajustes para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .transform {
+    transition: none !important;
+  }
+  
+  .transition-transform {
+    transition: none !important;
+  }
+}
+
+/* Melhorias para focus visible */
+.focus\:ring-2:focus-visible {
+  @apply ring-2 ring-primary-500 ring-offset-2 dark:ring-offset-gray-900;
+}

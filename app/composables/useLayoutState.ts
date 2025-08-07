@@ -32,18 +32,28 @@ export const useLayoutState = () => {
     }
   })
   
-  // Fechar sidebar com tecla ESC
+  // Detectar mudanças de tamanho da tela
   if (import.meta.client) {
     onMounted(() => {
+      const handleResize = () => {
+        // Fechar sidebar automaticamente em telas pequenas
+        if (window.innerWidth < 1024 && sidebarOpen.value) {
+          closeSidebar()
+        }
+      }
+      
       const handleEscape = (e: KeyboardEvent) => {
         if (e.key === 'Escape' && sidebarOpen.value) {
           closeSidebar()
         }
       }
       
+      // Listeners
+      window.addEventListener('resize', handleResize)
       document.addEventListener('keydown', handleEscape)
       
       onUnmounted(() => {
+        window.removeEventListener('resize', handleResize)
         document.removeEventListener('keydown', handleEscape)
       })
     })

@@ -69,12 +69,6 @@ const errorInfo = computed(() => getErrorInfo(props.error?.statusCode || 500))
 
         <button class="btn-secondary" @click="$router.go(-1)">Voltar</button>
       </div>
-
-      <!-- Informações de debug (apenas em desenvolvimento) -->
-      <details v-if="$dev" class="error-debug">
-        <summary>Informações de debug</summary>
-        <pre>{{ error }}</pre>
-      </details>
     </div>
   </div>
 </template>

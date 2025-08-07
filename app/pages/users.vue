@@ -66,7 +66,7 @@
                   </UBadge>
                 </td>
                 <td class="py-3 px-4 text-gray-600 dark:text-gray-400">
-                  {{ formatDate(user.createdAt) }}
+                  {{ format(user.createdAt, 'dd/MM/yyyy HH:mm') }}
                 </td>
                 <td class="py-3 px-4 text-center">
                   <UDropdownMenu
@@ -111,28 +111,17 @@
         </div>
       </UCard>
     </div>
-
-    <!-- Toast de notificações -->
-    <UNotifications />
   </UContainer>
 </template>
 
 <script setup lang="ts">
+import type { User } from '#server/database/schema'
+import { format } from 'date-fns'
+
 // Metadados da página
 definePageMeta({
   title: 'Usuários',
 })
-
-// Interface do usuário
-interface User {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: string
-  updatedAt: string
-}
 
 // Buscar dados dos usuários
 const {
@@ -150,18 +139,6 @@ const toast = useToast()
 
 // Dados reativas
 const users = computed(() => response.value?.data || [])
-
-// Função para formatar data
-function formatDate(dateString: string) {
-  const date = new Date(dateString)
-  return new Intl.DateTimeFormat('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(date)
-}
 
 // Handlers das ações
 function handleAddUser() {
