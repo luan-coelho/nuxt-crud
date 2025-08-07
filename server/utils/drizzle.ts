@@ -5,7 +5,7 @@ import { drizzle as drizzleNeon } from 'drizzle-orm/neon-http'
 // Imports condicionais baseados no ambiente
 import { drizzle as drizzlePostgres } from 'drizzle-orm/node-postgres'
 
-import { schema } from '../database/schema'
+import { schema } from '#server/database/schema'
 
 // Detecta se está em ambiente de desenvolvimento
 const isDevelopment = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined
@@ -22,3 +22,7 @@ function createDatabase() {
 }
 
 export const db = createDatabase()
+
+export function useDrizzle() {
+  return db
+}
